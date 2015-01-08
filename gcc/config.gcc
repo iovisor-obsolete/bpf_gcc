@@ -481,6 +481,10 @@ tilegx*-*-*)
 tilepro*-*-*)
 	cpu_type=tilepro
 	;;
+bpf*-*-*)
+	cpu_type=bpf
+	need_64bit_hwint=yes
+	;;
 esac
 
 tm_file=${cpu_type}/${cpu_type}.h
@@ -2473,6 +2477,14 @@ rl78-*-elf*)
 	c_target_objs="rl78-c.o"
 	cxx_target_objs="rl78-c.o"
 	tmake_file="${tmake_file} rl78/t-rl78"
+        ;;
+bpf-*-*)
+	tm_file="bpf/linux.h"
+	xm_defines="USG POSIX"
+	tmake_file=""
+	extra_parts=""
+        extra_objs=""
+	c_target_objs="default-c.o"
 	;;
 rx-*-elf*)
 	tm_file="dbxelf.h elfos.h newlib-stdint.h ${tm_file}"
@@ -3699,6 +3711,10 @@ case "${target}" in
 			;;
 		esac
 		;;
+	bpf-*-*)
+		supported_defaults="cpu"
+	        with_cpu=unknown
+                ;;
 
 	fido-*-* | m68k*-*-*)
 		supported_defaults="arch cpu"
@@ -4328,6 +4344,8 @@ do
 		fi
 	fi
 done
+
+configure_default_options="{ { NULL, NULL} }"
 
 if test "x$t" = x
 then

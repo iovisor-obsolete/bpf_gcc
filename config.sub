@@ -215,6 +215,9 @@ case $os in
 	-clix*)
 		basic_machine=clipper-intergraph
 		;;
+        -bpf*)
+                basic_machine=bpf-unknown-linux
+                ;;
 	-isc*)
 		basic_machine=`echo $1 | sed -e 's/86-.*/86-pc/'`
 		;;
@@ -257,7 +260,7 @@ case $basic_machine in
 	| avr | avr32 \
 	| be32 | be64 \
 	| bfin \
-	| c4x | c8051 | clipper \
+	| c4x | c8051 | clipper | bpf \
 	| d10v | d30v | dlx | dsp16xx \
 	| epiphany \
 	| fido | fr30 | frv | ft32 \
@@ -379,7 +382,7 @@ case $basic_machine in
 	| be32-* | be64-* \
 	| bfin-* | bs2000-* \
 	| c[123]* | c30-* | [cjt]90-* | c4x-* \
-	| c8051-* | clipper-* | craynv-* | cydra-* \
+	| c8051-* | clipper-* | bpf-* | craynv-* | cydra-* \
 	| d10v-* | d30v-* | dlx-* \
 	| elxsi-* \
 	| f30[01]-* | f700-* | fido-* | fr30-* | frv-* | fx80-* \
@@ -1302,7 +1305,10 @@ case $basic_machine in
 	sparc | sparcv8 | sparcv9 | sparcv9b | sparcv9v)
 		basic_machine=sparc-sun
 		;;
-	cydra)
+        bpf)
+		basic_machine=bpf-unknown
+		;;
+        cydra)
 		basic_machine=cydra-cydrome
 		;;
 	orion)
